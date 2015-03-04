@@ -178,14 +178,15 @@ namespace homework01
         }
         //Function: updateTargetFile
         //Input: a list of strings (file lines) and a path name
-        //Function writes pig latin file to target file
+        //Function writes pig latin file to new target file
         public static void updateTargetFile(List<string> aList, string path)
         {
-            using (StreamWriter file = new StreamWriter(path))
-            {
+            //FileInfo myFile = new FileInfo(@path"piglatin.ini");
+            using (StreamWriter myFile = File.CreateText("PigLatin.ini")) 
+            {                
                 foreach (string line in aList)
                 {
-                    file.WriteLine(line);
+                    myFile.WriteLine(line);
                 }               
             }
         }
