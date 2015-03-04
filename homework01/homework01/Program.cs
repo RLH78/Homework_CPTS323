@@ -35,6 +35,8 @@ namespace homework01
                 Console.ReadLine();
                 return;
             }
+
+            string originPath = args[0];
             
             using (TextReader reader = File.OpenText(args[0]))
             {             
@@ -81,7 +83,7 @@ namespace homework01
                 Console.WriteLine("\nList of Commands: ");
                 Console.WriteLine("1. Print");
                 Console.WriteLine("2. Print <target name>");
-                Console.WriteLine("3. Convert <file path>");
+                Console.WriteLine("3. Convert <new file path>");
                 Console.WriteLine("4. Isfriend <target name>");
                 Console.WriteLine("5. Exit");
                 Console.WriteLine("Please type in one of the commands");
@@ -101,7 +103,7 @@ namespace homework01
                         break;
                     case 3: // convert <file name>
                         string path = determinePath(command);
-                        convertToPig(path);
+                        convertToPig(originPath, path);
                         break;
                     case 4: // isfriend <file name>
                         areYouMyFriend(targets, targetCount, command);
@@ -118,7 +120,7 @@ namespace homework01
         //Function: convertToPig
         //Input: the path name
         //Opens the file and converts the target label and name to pig latin. Writes the file back to path name.
-        public static void convertToPig(string pathName)
+        public static void convertToPig(string pathName, string Name)
         {
             string line = ""; // a full line read from file
             List<string> lineList = new List<string>(); // list of lines
@@ -152,7 +154,7 @@ namespace homework01
                         lineList.Add(line);
                     }
                 }
-                updateTargetFile(lineList, pathName);
+                updateTargetFile(lineList, Name);
             }
             catch
             {
@@ -182,7 +184,7 @@ namespace homework01
         public static void updateTargetFile(List<string> aList, string path)
         {
             //FileInfo myFile = new FileInfo(@path"piglatin.ini");
-            using (StreamWriter myFile = File.CreateText("PigLatin.ini")) 
+            using (StreamWriter myFile = File.CreateText(path)) 
             {                
                 foreach (string line in aList)
                 {
